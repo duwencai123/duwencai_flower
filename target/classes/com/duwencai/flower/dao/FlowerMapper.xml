@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duwencai.flower.dao.FlowerMapper">
+
+	<select id="getFlowerList" resultType="map">
+		select * from t_flower a LEFT JOIN t_type b on a.tid=b.tid where a.fname like '%${value}%'
+	</select>
+	
+	<select id="getTypeList" resultType="Type">
+		select * from t_type
+	</select>
+	
+	<delete id="deleteFlower">
+		delete from t_flower where fid=${value}
+	</delete>
+	
+	<insert id="addFlower">
+		insert into t_flower set fname=#{fname},fdesc=#{fdesc},tid=${tid}
+	</insert>
+	
+	<update id="updateFlower">
+		update t_flower set fname=#{fname},fdesc=#{fdesc},tid=${tid} where fid=${fid}
+	</update>
+	
+	<select id="getFlowerById" resultType="Flower">
+		select * from t_flower where fid=${value}
+	</select>
+</mapper>
